@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Personality Blender</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      width: 400px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .traits {
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    .traits label {
+      display: block;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 8px;
+      accent-color: #ffd86f;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 30px;
+      background: #ffd86f;
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 15px;
+      background: rgba(0,0,0,0.25);
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .result h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🧠 Personality Blender</h1>
+    <p>Select traits and blend your personality</p>
+
+    <div class="traits">
+      <label><input type="checkbox" value="Creative"> Creative</label>
+      <label><input type="checkbox" value="Logical"> Logical</label>
+      <label><input type="checkbox" value="Adventurous"> Adventurous</label>
+      <label><input type="checkbox" value="Empathetic"> Empathetic</label>
+      <label><input type="checkbox" value="Ambitious"> Ambitious</label>
+    </div>
+
+    <button onclick="blendPersonality()">Blend Personality</button>
+
+    <div class="result" id="result">
+      <h2 id="title"></h2>
+      <p id="description"></p>
+    </div>
+  </div>
+
+  <script>
+    function blendPersonality() {
+      const checked = document.querySelectorAll('input[type="checkbox"]:checked');
+      const resultBox = document.getElementById("result");
+      const title = document.getElementById("title");
+      const description = document.getElementById("description");
+
+      if (checked.length === 0) {
+        alert("Please select at least one trait!");
+        return;
+      }
+
+      let traits = [];
+      checked.forEach(item => traits.push(item.value));
+
+      let personalityTitle = traits.join(" + ");
+      let personalityDesc =
+        "You are a unique blend of " +
+        traits.join(", ") +
+        ". This combination makes you adaptable, expressive, and capable of handling diverse situations with confidence.";
+
+      title.textContent = personalityTitle;
+      description.textContent = personalityDesc;
+
+      resultBox.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
